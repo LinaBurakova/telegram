@@ -8,13 +8,10 @@ class DataBase:
     def setup(self, table: str, data: dict):
         keys = list(data.keys())
         values = list(data.values())
-        # print(keys)
-        # print(values)
         req = f'CREATE TABLE IF NOT EXISTS "{table}"('
         for i in range(len(keys)):
             req += f'"{keys[i]}" {values[i]}, '
         req = req[:-2] + ')'
-        # print(req)
         self.__conn.cursor()
         self.__conn.execute(req)
         self.__conn.commit()
@@ -22,7 +19,6 @@ class DataBase:
     def add_item(self, table: str, data: dict):
         columns = ''
         values = ''
-
         for i in range(len(data.keys())):
             columns += f'"{list(data.keys())[i]}", '
             values += f'"{list(data.values())[i]}", '
@@ -41,10 +37,8 @@ class DataBase:
     def get_item(self, table: str, data: dict):
         curs = self.__conn.cursor()
         req = f'SELECT {list(data.keys())[0]} FROM "{table}"'
-        # print(req)
         select = curs.execute(req, )
         select_data = select.fetchone()
-        # print(select_data)
         self.__conn.commit()
         if select_data is None:
             return data
@@ -97,7 +91,6 @@ class DataBase:
 
 DataBase()
 db = DataBase()
-
 db.setup(table='Users',
                data={
                     'telegram_id': 'integer primary key',

@@ -1,43 +1,35 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-import bd, random
-
+import bd
 bd = bd.DataBase()
 
-menu = ['Add Personal Info', 'Translator', 'Video Lessons','Gramma in Picture','Show Personal Info']
+menu = ['Add Personal Info', 'Word Translator', 'Video Lessons','Gramma in Picture','Show Personal Info']
 keyboard_menu = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-keyboard_menu.add(KeyboardButton('MAIN'))
+keyboard_menu.add(KeyboardButton('MAIN MENU'))
 for i in menu:
     keyboard_menu.insert(i)
-# keyboard_menu.add(KeyboardButton('Show Personal Info'))
-
 
 def get_kbrd():
     menu = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    # for user in get_users():
-    #     menu.insert(KeyboardButton(user[3]))
     menu.row(
         KeyboardButton('Phone', request_contact=True),
         KeyboardButton('Email',))
-    menu.add(KeyboardButton('MAIN'))
+    menu.add(KeyboardButton('MAIN MENU'))
     return menu
 
 def more_kbrd():
-    menu = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    menu.row(KeyboardButton('More', ))
-    menu.add(KeyboardButton('MAIN'))
-    return menu
+    btn = InlineKeyboardButton(text='Видео уроки английского языка', url='http://klassikaknigi.info/video-uroki-anglijskogo-yazyka/')
+    btn1 = InlineKeyboardButton(text='Islcollective', url='https://en.islcollective.com/english-esl-video-lessons')
+    btn2 = InlineKeyboardButton(text='Islcollective', url='https://vse-kursy.com/onlain/language/english/free/')
+    kbrd = InlineKeyboardMarkup().add(btn,btn1,btn2)
+    return kbrd
 
 def get_kbrd_translate():
     menu = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    menu.add(KeyboardButton('Завершить перевод'))
+    menu.add(KeyboardButton('Stop translator'))
     return menu
-
-
-# def inline_keyboard():
-#     btn1 = InlineKeyboardButton(text='Video lessons', callback_data= 'https://en.islcollective.com/video-lessons/search')
-#     btn2 = InlineKeyboardButton(text='Check yourself', callback_data= 'How to translate?')
-#     btn3 = InlineKeyboardButton(text='English in picture', callback_data='button3')
-#     kbrd = InlineKeyboardMarkup(resize_keyboard=True, row_width=2).add(btn1, btn2, btn3)
-#     return kbrd
+def get_menu():
+    menu = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    menu.add(KeyboardButton('MAIN MENU'))
+    return menu
